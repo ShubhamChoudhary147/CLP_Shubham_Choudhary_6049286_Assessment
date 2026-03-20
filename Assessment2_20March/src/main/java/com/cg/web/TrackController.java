@@ -17,7 +17,7 @@ import com.cg.entity.Track;
 import com.cg.repo.ITrackRepository;
 
 @RestController
-@RequestMapping("/track")
+@RequestMapping("/tracks")
 public class TrackController {
 
     @Autowired
