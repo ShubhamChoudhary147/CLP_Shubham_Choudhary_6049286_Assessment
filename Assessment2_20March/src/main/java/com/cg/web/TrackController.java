@@ -1,6 +1,7 @@
 package com.cg.web;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -41,7 +42,11 @@ public class TrackController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Object> getTrack(@PathVariable Long id) {
-    	
-        return repo.findById(id).<ResponseEntity<Object>>map(track -> ResponseEntity.ok(track)).orElseGet(() -> ResponseEntity.notFound().build());
+    	Optional<Track> trackOpt = repo.findById(id);
+    	if(trackOpt.isPresent()) {
+    		return ResponseEntity.ok(trackOpt.get());
+    	} else {
+    		return ResponseEntity.notFound().build();
+    	}
     }
 }
